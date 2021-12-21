@@ -12,21 +12,23 @@ export default function TodoItem({title, id, completed}) {
 
   return (
     <li className={cls.join(" ")}>
-      <label>
-        <input
-          type="checkbox"
-          checked={completed}
-          onChange={() => toggleTodo(id)}
-        />
-        <span>{title}</span>
-
+      <div className={"todo-all"}>
+        <div id="todo-text">
+          <input
+              className={"cheak-box"}
+              type="checkbox"
+              checked={completed}
+              onChange={() => toggleTodo(id)}
+          />
+          <span>{title}</span>
+        </div>
         <i
           className="material-icons red-text"
           onClick={() => removeTodo(id)}
         >
           delete
         </i>
-      </label>
+      </div>
     </li>
   )
 }

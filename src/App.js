@@ -1,6 +1,8 @@
 import React, { useState,useEffect } from 'react'
 import TodoList from './TodoList'
 import {Context} from "./context"
+import {Footer} from "./component/Footer";
+import "./index.css"
 
 export default  function App() {
    const [todos,setTodos] = useState([])
@@ -13,12 +15,13 @@ export default  function App() {
   }, [])
 
     useEffect(() => {
-    
       localStorage.setItem("todos", JSON.stringify(todos))
-    
     }, [todoTitle])
 
+  const [count,setCount] = useState(0)
+
     const addTodo = event => {
+
       if(event.key === "Enter"){
         setTodos([
           ...todos,
@@ -40,7 +43,10 @@ export default  function App() {
 
     const toggleTodo = id => {
       setTodos(todos.map(todo => {
+        let count = 0
         if(todo.id === id){
+          count++
+          console.log(count)
           todo.completed = !todo.completed
         }
         return todo
@@ -48,25 +54,26 @@ export default  function App() {
     }
 
 
+
     return (
       <Context.Provider value={{
         toggleTodo, removeTodo
       }}>
         <div className="container">
-        <h2 className='zagolovok'>Your todo list</h2>
+        <h1 className='zagolovok'>Your todo list</h1>
 
           <div className="input-field">
-            <input 
+            <input
+            className={"input-text"}
             type="text"
             value={todoTitle}
             onChange={event => setTodosTitle(event.target.value)}
             onKeyPress={addTodo}
             placeholder='Enter your task here'
             />
-            
+            <TodoList todos={todos} />
+            <Footer></Footer>
           </div>
-
-          <TodoList todos={todos} />
       </div>
       </Context.Provider>
     );
