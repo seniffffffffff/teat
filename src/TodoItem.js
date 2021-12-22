@@ -2,7 +2,7 @@ import React, {useContext} from 'react'
 import { Context } from './context'
 
 export default function TodoItem({title, id, completed}) {
-  const {toggleTodo, removeTodo} = useContext(Context)
+  const {toggleTodo, removeTodo, cheaKed} = useContext(Context)
 
   const cls = ["todo"]
 
@@ -18,6 +18,7 @@ export default function TodoItem({title, id, completed}) {
               className={"cheak-box"}
               type="checkbox"
               checked={completed}
+              onClick={cheaKed}
               onChange={() => toggleTodo(id)}
           />
           <span>{title}</span>

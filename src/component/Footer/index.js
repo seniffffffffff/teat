@@ -1,10 +1,14 @@
-import React from 'react';
+import React,{useContext} from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import {Context} from "../../context";
 
-export function Footer(){
+const Index = ({values}) => {
+    const {cheaKed} = useContext(Context)
+
+    console.log(values)
     return (
         <div className="footer">
-            <p className={"tasks-left"}>tasks left</p>
+            <p className={"tasks-left"}>{cheaKed} tasks left</p>
             <div className="buttons">
                 <div className="form_radio_btn">
                     <input id={"radio-1"} type={"radio"} name={"radio"} value={"1"}/>
@@ -26,4 +30,6 @@ export function Footer(){
         </div>
     )
 }
+
+export default Index
 

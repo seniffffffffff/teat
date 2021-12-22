@@ -1,13 +1,12 @@
 import React, { useState,useEffect } from 'react'
 import TodoList from './TodoList'
 import {Context} from "./context"
-import {Footer} from "./component/Footer";
+import Index from "./component/Footer/index";
 import "./index.css"
 
 export default  function App() {
    const [todos,setTodos] = useState([])
    const[todoTitle, setTodosTitle] = useState("")
-
 
   useEffect( () => {
     const raw = localStorage.getItem("todos") || []
@@ -18,10 +17,7 @@ export default  function App() {
       localStorage.setItem("todos", JSON.stringify(todos))
     }, [todoTitle])
 
-  const [count,setCount] = useState(0)
-
     const addTodo = event => {
-
       if(event.key === "Enter"){
         setTodos([
           ...todos,
@@ -41,23 +37,34 @@ export default  function App() {
       }))
     }
 
+    let count
+     let values = todos.length
+
+    const cheaKed = event => {
+        if (event.target.checked){
+          values--
+          console.log(values)
+          return  <p>values</p>
+        } else {
+          console.log(values)
+          return <p>values</p>
+        }
+    }
+
+
     const toggleTodo = id => {
+
       setTodos(todos.map(todo => {
-        let count = 0
         if(todo.id === id){
-          count++
-          console.log(count)
           todo.completed = !todo.completed
         }
         return todo
       }))
     }
 
-
-
     return (
       <Context.Provider value={{
-        toggleTodo, removeTodo
+        toggleTodo, removeTodo , cheaKed
       }}>
         <div className="container">
         <h1 className='zagolovok'>Your todo list</h1>
@@ -72,7 +79,7 @@ export default  function App() {
             placeholder='Enter your task here'
             />
             <TodoList todos={todos} />
-            <Footer></Footer>
+            <Index values={values} />
           </div>
       </div>
       </Context.Provider>
