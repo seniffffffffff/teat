@@ -37,7 +37,7 @@ export default  function App() {
       }))
     }
 
-    let count
+
      let values = todos.length
 
     const cheaKed = event => {
