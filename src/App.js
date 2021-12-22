@@ -7,6 +7,8 @@ import "./index.css"
 export default  function App() {
    const [todos,setTodos] = useState([])
    const[todoTitle, setTodosTitle] = useState("")
+   let [count, setCount] = useState(0)
+
 
   useEffect( () => {
     const raw = localStorage.getItem("todos") || []
@@ -19,6 +21,7 @@ export default  function App() {
 
     const addTodo = event => {
       if(event.key === "Enter"){
+        setCount(count + 1)
         setTodos([
           ...todos,
           {
@@ -32,22 +35,24 @@ export default  function App() {
     }
 
     const removeTodo = id => {
+      setCount(count - 1)
       setTodos(todos.filter(todo => {
         return todo.id !== id
       }))
     }
 
 
-     let values = todos.length
+    //  let values = todos.length
 
     const cheaKed = event => {
         if (event.target.checked){
-          values--
-          console.log(values)
-          return  <p>values</p>
+          setCount(count - 1)
+          console.log("da")
+          
         } else {
-          console.log(values)
-          return <p>values</p>
+          setCount(count + 1)
+          console.log("net")
+          
         }
     }
 
@@ -79,7 +84,7 @@ export default  function App() {
             placeholder='Enter your task here'
             />
             <TodoList todos={todos} />
-            <Index values={values} />
+            <Index count={count} />
           </div>
       </div>
       </Context.Provider>
