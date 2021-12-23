@@ -2,13 +2,16 @@ import React, { useState,useEffect } from 'react'
 import TodoList from './TodoList'
 import {Context} from "./context"
 import Index from "./component/Footer/index";
+import ToDO from "./component/ToDO";
 import "./index.css"
+import TodoItem from "./TodoItem";
 
-export default  function App() {
+export default  function App({}) {
    const [todos,setTodos] = useState([])
    const[todoTitle, setTodosTitle] = useState("")
    let [count, setCount] = useState(0)
 
+   let newTodos = JSON.parse(JSON.stringify(todos))
 
   useEffect( () => {
     const raw = localStorage.getItem("todos") || []
@@ -19,8 +22,12 @@ export default  function App() {
       localStorage.setItem("todos", JSON.stringify(todos))
     }, [todoTitle])
 
+  let div = document.getElementById("footer")
+
+
     const addTodo = event => {
       if(event.key === "Enter"){
+        div.className = "footer"
         setCount(count + 1)
         setTodos([
           ...todos,
@@ -41,24 +48,40 @@ export default  function App() {
       }))
     }
 
+    let findTo = newTodos.filter(elem => elem.completed === false)
+    let compTo = newTodos.filter(elem => elem.completed === true)
 
-    //  let values = todos.length
+    const allTodo = (event) => {
+      setTodos([
+          ...todos
+      ])
+    }
+  console.log(newTodos)
+    const findTodo = (event) => {
+      setTodos([
+        ...findTo
+      ])
+    }
+
+    const findComplited = (event) => {
+      setTodos([
+        ...compTo
+      ])
+    }
 
     const cheaKed = event => {
         if (event.target.checked){
           setCount(count - 1)
-          console.log("da")
-          
         } else {
           setCount(count + 1)
-          console.log("net")
-          
         }
     }
 
+    const selectAllTodo = event => {
+
+    }
 
     const toggleTodo = id => {
-
       setTodos(todos.map(todo => {
         if(todo.id === id){
           todo.completed = !todo.completed
@@ -67,13 +90,12 @@ export default  function App() {
       }))
     }
 
-    return (
+  return (
       <Context.Provider value={{
-        toggleTodo, removeTodo , cheaKed
+        toggleTodo, removeTodo , cheaKed, findTodo, allTodo, findComplited, selectAllTodo
       }}>
         <div className="container">
         <h1 className='zagolovok'>Your todo list</h1>
-
           <div className="input-field">
             <input
             className={"input-text"}

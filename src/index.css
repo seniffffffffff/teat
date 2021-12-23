@@ -66,8 +66,8 @@ li{
   justify-content: space-between;
 }
 ul{
-  padding: 10px 0 0 10px;
-  margin: 0 0 0 -32px;
+  padding: 10px 0 0 0px;
+  margin: 0;
 }
 .todo {
   margin-bottom: 1rem;
@@ -91,6 +91,16 @@ ul{
 .tasks-left{
   margin: 0;
   color: grey;
+  outline: none;
+  background: none;
+  border: none;
+}
+button:focus{
+  outline: 0 !important;
+  border: none;
+}
+button:hover{
+  color: black;
 }
 .buttons{
   display: flex;
