@@ -2,17 +2,13 @@ import React, {useContext} from 'react'
 import { Context } from './context'
 
 export default function TodoItem({title, id, completed}) {
-  const {toggleTodo, removeTodo, cheaKed} = useContext(Context)
+  const {toggleTodo, removeTodo} = useContext(Context)
 
   const cls = ["todo"]
 
   if (completed) {
     cls.push("completed")
   }
-
-  let put = document.getElementById("idInput")
-  put.checked = true
-  console.log(put)
 
   return (
     <li className={cls.join(" ")}>
@@ -22,8 +18,9 @@ export default function TodoItem({title, id, completed}) {
               className={"cheak-box"}
               id={"idInput"}
               type="checkbox"
+              value={completed}
               checked={completed}
-              onClick={cheaKed}
+              // onClick={cheaKed}
               onChange={() => toggleTodo(id)}
           />
           <span>{title}</span>

@@ -1,4 +1,4 @@
-import React, { useState,useEffect } from 'react'
+import React, { useState,useEffect , useMemo} from 'react'
 import TodoList from './TodoList'
 import {Context} from "./context"
 import Index from "./component/Footer/index";
@@ -9,7 +9,9 @@ import TodoItem from "./TodoItem";
 export default  function App({}) {
    const [todos,setTodos] = useState([])
    const[todoTitle, setTodosTitle] = useState("")
-   let [count, setCount] = useState(0)
+   let [count, setCount] = useState(0);
+
+   let [filters, setFilters] = useState(0)
 
    let newTodos = JSON.parse(JSON.stringify(todos))
 
@@ -23,6 +25,7 @@ export default  function App({}) {
     }, [todoTitle])
 
   let div = document.getElementById("footer")
+  let clearButton = document.getElementById("but")
 
 
     const addTodo = event => {
@@ -48,51 +51,55 @@ export default  function App({}) {
       }))
     }
 
-    let findTo = newTodos.filter(elem => elem.completed === false)
-    let compTo = newTodos.filter(elem => elem.completed === true)
-
     const allTodo = (event) => {
-      setTodos([
-          ...todos
-      ])
+      setFilters(0)
     }
-  console.log(newTodos)
+
     const findTodo = (event) => {
-      setTodos([
-        ...findTo
-      ])
+      setFilters(filters = 1)
     }
 
     const findComplited = (event) => {
-      setTodos([
-        ...compTo
-      ])
+      setFilters(filters = 2)
     }
 
-    const cheaKed = event => {
-        if (event.target.checked){
-          setCount(count - 1)
-        } else {
-          setCount(count + 1)
-        }
-    }
+    const taskLeft = useMemo(() => {
+       return todos.filter(item => item.completed !== true ).length
+    }, [todos])
 
-    const selectAllTodo = event => {
+  const selectAllTodo = () => {
+setTodos(todos.filter(elem => elem.completed === false ? elem.completed = true : elem))
+  }
 
-    }
+  const deleteAll = () => {
+    setTodos(todos.filter(elem => elem.completed === true ? null : elem))
+    clearButton.style.zIndex = "-2"
+  }
 
     const toggleTodo = id => {
       setTodos(todos.map(todo => {
         if(todo.id === id){
+          clearButton.style.zIndex = "0"
           todo.completed = !todo.completed
         }
         return todo
       }))
     }
 
+    const filteredTask  = useMemo(() => {
+     switch (filters) {
+       case 0 : return todos
+       case 1 : return todos.filter(item => item.completed !== true )
+       case 2 : return todos.filter(item => item.completed !== false)
+       //case 3 : return todos.filter(elem => elem.completed === false ? elem.completed = true : elem)
+
+     }
+    }, [todos, filters])
+
+
   return (
       <Context.Provider value={{
-        toggleTodo, removeTodo , cheaKed, findTodo, allTodo, findComplited, selectAllTodo
+        toggleTodo, removeTodo , taskLeft, selectAllTodo, findTodo, allTodo, findComplited,deleteAll
       }}>
         <div className="container">
         <h1 className='zagolovok'>Your todo list</h1>
@@ -105,8 +112,8 @@ export default  function App({}) {
             onKeyPress={addTodo}
             placeholder='Enter your task here'
             />
-            <TodoList todos={todos} />
-            <Index count={count} />
+            <TodoList todos={filteredTask} />
+            <Index count={taskLeft} filters={filters} />
           </div>
       </div>
       </Context.Provider>

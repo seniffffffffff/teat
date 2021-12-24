@@ -2,8 +2,8 @@ import React,{useContext} from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {Context} from "../../context";
 
-const Index = ({count}) => {
-    const {findTodo, allTodo, findComplited, selectAllTodo} = useContext(Context)
+const Index = ({count,filters}) => {
+    const {findTodo, allTodo, findComplited, selectAllTodo, deleteAll} = useContext(Context)
 
     return (
         <div className="hidden" id={"footer"}>
@@ -17,13 +17,12 @@ const Index = ({count}) => {
                     <input id={"radio-2"} type={"radio"} name={"radio"} value={"1"} onClick={findTodo}/>
                     <label htmlFor="radio-2" onClick={findTodo}>ToDo</label>
                 </div>
-                <div className="form_radio_btn" onClick={findComplited}>
+                <div className="form_radio_btn" onClick={() =>findComplited(1)}>
                     <input id={"radio-3"} type={"radio"} name={"radio"} value={"1"}/>
                     <label htmlFor="radio-3">Completed</label>
                 </div>
-                <div className="hidden">
-                    <input id={"radio-4"} type={"radio"} name={"radio"} value={"1"}/>
-                    <label htmlFor="radio-4">asdg</label>
+                <div id="but">
+                    <button className={"tasks-left"} onClick={deleteAll} >Clear completed</button>
                 </div>
             </div>
         </div>
