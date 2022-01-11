@@ -1,8 +1,7 @@
-import React, {useContext} from 'react'
-import { Context } from './context'
+import React from 'react'
 
-export default function TodoItem({title, id, completed}) {
-  const {toggleTodo, removeTodo} = useContext(Context)
+
+export default function TodoItem({title, count, id, completed, toggleTodo, removeTodo}) {
 
   const cls = ["todo"]
 
@@ -14,15 +13,18 @@ export default function TodoItem({title, id, completed}) {
     <li className={cls.join(" ")}>
       <div className={"todo-all"}>
         <div id="todo-text">
-          <input
-              className={"cheak-box"}
-              id={"idInput"}
-              type="checkbox"
-              value={completed}
-              checked={completed}
-              // onClick={cheaKed}
-              onChange={() => toggleTodo(id)}
-          />
+          <div className="div-label">
+            <input
+                className={"cheak-box"}
+                id={id}
+                name={"boxes"}
+                type="checkbox"
+                value={completed}
+                checked={completed}
+                onChange={() => {toggleTodo(id)}}
+            />
+            <label htmlFor={id}></label>
+          </div>
           <span>{title}</span>
         </div>
         <i
