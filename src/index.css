@@ -151,12 +151,14 @@ ul{
   background: none;
   border: none;
 }
-
-.footer button:last-of-type {
-    visibility: hidden;
+.gray{
+  color: grey;
 }
 .showButton{
   visibility: visible;
+}
+.hideButton{
+  visibility: hidden;
 }
 
 button:focus{

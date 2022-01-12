@@ -1,7 +1,7 @@
 import React from 'react'
 
 
-export default function TodoItem({title, count, id, completed, toggleTodo, removeTodo}) {
+export default function TodoItem({title, id, completed, toggleTodo, removeTodo}) {
 
   const cls = ["todo"]
 
@@ -23,12 +23,12 @@ export default function TodoItem({title, count, id, completed, toggleTodo, remov
                 checked={completed}
                 onChange={() => {toggleTodo(id)}}
             />
-            <label htmlFor={id}></label>
+            <label htmlFor={id}/>
           </div>
           <span>{title}</span>
         </div>
         <i
-          className="material-icons red-text"
+          className="material-icons red-text gray"
           onClick={() => removeTodo(id)}
         >
           delete

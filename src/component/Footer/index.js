@@ -1,9 +1,8 @@
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-const Index = ({count, findTodo, allTodo, findComplited, selectAllTodo, deleteAll,filteredTask}) => {
+const Index = ({count, findTodo, allTodo, findComplited, selectAllTodo, deleteAll, isShowButton}) => {
 
-    const isShowButton = "showButton"
 
     return (
         <div className="footer">
@@ -22,7 +21,7 @@ const Index = ({count, findTodo, allTodo, findComplited, selectAllTodo, deleteAl
                     <label htmlFor="radio-3" id={"reset"}>Completed</label>
                 </div>
             </div>
-            <button className={`tasks-left ${isShowButton ? "showButton": null}`} onClick={() => deleteAll()} >Clear completed</button>
+            <button className={`tasks-left ${isShowButton ? "showButton" : "hideButton"}`} onClick={() => deleteAll()} >Clear completed</button>
         </div>
     )
 }

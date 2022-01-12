@@ -51,7 +51,6 @@ export default function App() {
     }
 
     const findTodo = (event) => {
-      console.log("asd")
         setFilters(1)
     }
 
@@ -112,13 +111,13 @@ export default function App() {
                             {...item}
                             key={item.id}
                             removeTodo={removeTodo}
-                            count={count}
                             toggleTodo={toggleTodo}
                         />)}
                 </ul>
                 {
                     todos.length > 0 &&
                     <Footer
+                        isShowButton={!!todos.filter(item => item.completed).length}
                         count={taskLeft}
                         todos={todos}
                         filters={filters}
@@ -127,7 +126,6 @@ export default function App() {
                         findTodo={findTodo}
                         findComplited={findComplited}
                         deleteAll={deleteAll}
-                        filteredTask={filteredTask}
                     />
                 }
             </div>
