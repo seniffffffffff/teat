@@ -10,7 +10,6 @@ export default function App() {
 
     let [filters, setFilters] = useState(0)
 
-    // let newTodos = JSON.parse(JSON.stringify(todos))
 
     useEffect(() => {
         const raw = localStorage.getItem("todos") || []
@@ -20,9 +19,6 @@ export default function App() {
     useEffect(() => {
         localStorage.setItem("todos", JSON.stringify(todos))
     }, [todoTitle])
-
-    // let clearButton = document.getElementById("but")
-
 
     const addTodo = event => {
         if (event.key === "Enter") {
@@ -46,15 +42,15 @@ export default function App() {
         }))
     }
 
-    const allTodo = (event) => {
+    const allTodo = () => {
         setFilters(0)
     }
 
-    const findTodo = (event) => {
+    const findTodo = () => {
         setFilters(1)
     }
 
-    const findComplited = (event) => {
+    const findComplited = () => {
         setFilters(2)
     }
 
@@ -63,7 +59,6 @@ export default function App() {
     }, [todos])
 
     const selectAllTodo = () => {
-      console.log("asd")
         setTodos(todos.filter(elem => elem.completed === false ? elem.completed = true : elem))
     }
 
@@ -74,7 +69,6 @@ export default function App() {
     const toggleTodo = id => {
         setTodos(todos.map(todo => {
             if (todo.id === id) {
-                // clearButton.style.zIndex = "0"
                 todo.completed = !todo.completed
             }
             return todo
