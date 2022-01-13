@@ -1,4 +1,4 @@
-import React, {useState, useEffect, useMemo} from 'react'
+import React, {useState, useEffect, useMemo} from "react"
 import Footer from "./component/Footer";
 import "./index.css"
 import TodoItem from "./TodoItem";
@@ -6,7 +6,6 @@ import TodoItem from "./TodoItem";
 export default function App() {
     const [todos, setTodos] = useState([])
     const [todoTitle, setTodosTitle] = useState("")
-    let [count, setCount] = useState(0);
 
     let [filters, setFilters] = useState(0)
 
@@ -22,7 +21,6 @@ export default function App() {
 
     const addTodo = event => {
         if (event.key === "Enter") {
-            setCount(count + 1)
             setTodos([
                 ...todos,
                 {
@@ -36,7 +34,6 @@ export default function App() {
     }
 
     function removeTodo(id) {
-        setCount(count - 1)
         setTodos(todos.filter(todo => {
             return todo.id !== id
         }))
@@ -80,7 +77,7 @@ export default function App() {
 
     return (
         <div className="container">
-            <h1 className='title'>Your todo list</h1>
+            <h1 className="title">Your todo list</h1>
             <div className="input-field">
                 <input
                     className={"input-text"}
@@ -88,10 +85,11 @@ export default function App() {
                     value={todoTitle}
                     onChange={event => setTodosTitle(event.target.value)}
                     onKeyPress={addTodo}
-                    placeholder='Enter your task here'
+                    placeholder="Enter your task here"
                 />
                 <ul>
-                    {filteredTask.map(item =>
+                    {
+                        filteredTask.map(item =>
                         <TodoItem
                             {...item}
                             key={item.id}
@@ -103,7 +101,7 @@ export default function App() {
                     todos.length > 0 &&
                     <Footer
                         isShowButton={!!todos.filter(item => item.completed).length}
-                        count={taskLeft}
+                        taskLeft={taskLeft}
                         filters={filters}
                         selectAllTodo={selectAllTodo}
                         deleteAll={deleteAll}

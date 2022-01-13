@@ -1,12 +1,12 @@
-import React from 'react';
-import 'bootstrap/dist/css/bootstrap.min.css';
+import React from "react";
+import "bootstrap/dist/css/bootstrap.min.css";
 
-const Index = ({count, selectAllTodo, deleteAll, isShowButton,filterAll}) => {
+const Index = ({taskLeft, selectAllTodo, deleteAll, isShowButton,filterAll}) => {
 
 
     return (
         <div className="footer">
-            <button className={"tasks-left"} onClick={() => selectAllTodo()} >{count} tasks left</button>
+            <button className={"tasks-left"} onClick={() => selectAllTodo()} >{taskLeft} tasks left</button>
             <div className="buttons">
                 <div className="form_radio_btn" onClick={() => filterAll(0)}>
                     <input id={"radio-1"} type={"radio"} name={"radio"} value={"1"}/>
