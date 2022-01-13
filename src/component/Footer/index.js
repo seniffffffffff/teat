@@ -1,22 +1,22 @@
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-const Index = ({count, findTodo, allTodo, findComplited, selectAllTodo, deleteAll, isShowButton}) => {
+const Index = ({count, selectAllTodo, deleteAll, isShowButton,filterAll}) => {
 
 
     return (
         <div className="footer">
             <button className={"tasks-left"} onClick={() => selectAllTodo()} >{count} tasks left</button>
             <div className="buttons">
-                <div className="form_radio_btn" onClick={() => allTodo()}>
+                <div className="form_radio_btn" onClick={() => filterAll(0)}>
                     <input id={"radio-1"} type={"radio"} name={"radio"} value={"1"}/>
                     <label htmlFor="radio-1" id={"reset"}>All</label>
                 </div>
-                <div className="form_radio_btn" onClick={() => findTodo()}>
+                <div className="form_radio_btn" onClick={() => filterAll(1)}>
                     <input id={"radio-2"} type={"radio"} name={"radio"} value={"1"} />
                     <label htmlFor="radio-2" id={"reset"}>ToDo</label>
                 </div>
-                <div className="form_radio_btn" onClick={() =>findComplited(1)}>
+                <div className="form_radio_btn" onClick={() =>filterAll(2)}>
                     <input id={"radio-3"} type={"radio"} name={"radio"} value={"1"}/>
                     <label htmlFor="radio-3" id={"reset"}>Completed</label>
                 </div>

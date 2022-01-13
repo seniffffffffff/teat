@@ -42,18 +42,6 @@ export default function App() {
         }))
     }
 
-    const allTodo = () => {
-        setFilters(0)
-    }
-
-    const findTodo = () => {
-        setFilters(1)
-    }
-
-    const findComplited = () => {
-        setFilters(2)
-    }
-
     const taskLeft = useMemo(() => {
         return todos.filter(item => item.completed !== true).length
     }, [todos])
@@ -75,6 +63,10 @@ export default function App() {
         }))
     }
 
+    const filterAll = (filter) =>{
+        return setFilters(filter)
+    }
+
     const filteredTask = useMemo(() => {
         switch (filters) {
             case 0 :
@@ -87,7 +79,6 @@ export default function App() {
     }, [todos, filters])
 
     return (
-
         <div className="container">
             <h1 className='title'>Your todo list</h1>
             <div className="input-field">
@@ -113,13 +104,10 @@ export default function App() {
                     <Footer
                         isShowButton={!!todos.filter(item => item.completed).length}
                         count={taskLeft}
-                        todos={todos}
                         filters={filters}
                         selectAllTodo={selectAllTodo}
-                        allTodo={allTodo}
-                        findTodo={findTodo}
-                        findComplited={findComplited}
                         deleteAll={deleteAll}
+                        filterAll={filterAll}
                     />
                 }
             </div>
