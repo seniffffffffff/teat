@@ -1,7 +1,7 @@
 import React from "react"
 
 
-export default function TodoItem({title, id, completed, toggleTodo, removeTodo}) {
+export default function TodoItem({text,title, id, completed, toggleTodo, removeTodo}) {
 
   const cls = ["todo"]
 
@@ -25,7 +25,7 @@ export default function TodoItem({title, id, completed, toggleTodo, removeTodo})
             />
             <label htmlFor={id}/>
           </div>
-          <span>{title}</span>
+          <span>{text}</span>
         </div>
         <i
           className="material-icons red-text gray"

@@ -2,8 +2,9 @@ import React, {useState, useEffect, useMemo} from "react"
 import Footer from "./component/Footer";
 import "./index.css"
 import TodoItem from "./TodoItem";
+import { addTodo } from './actions'
 
-export default function App() {
+export default function App({dispatch}) {
     const [todos, setTodos] = useState([])
     const [todoTitle, setTodosTitle] = useState("")
 
@@ -19,16 +20,23 @@ export default function App() {
         localStorage.setItem("todos", JSON.stringify(todos))
     }, [todoTitle])
 
+    let input
+
     const addTodo = event => {
         if (event.key === "Enter") {
-            setTodos([
-                ...todos,
-                {
-                    id: Date.now(),
-                    title: todoTitle,
-                    completed: false
-                }
-            ])
+
+            dispatch(addTodo(input.value))
+            input.value = ""
+
+            
+            // setTodos([
+            //     ...todos,
+            //     {
+            //         id: Date.now(),
+            //         title: todoTitle,
+            //         completed: false
+            //     }
+            // ])
             setTodosTitle("")
         }
     }
@@ -74,6 +82,8 @@ export default function App() {
                 return todos.filter(item => item.completed)
         }
     }, [todos, filters])
+
+    
 
     return (
         <div className="container">

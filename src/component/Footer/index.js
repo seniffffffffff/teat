@@ -1,5 +1,7 @@
 import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
+import { createStore } from 'redux'
+import { Provider } from 'react-redux'
 
 const Index = ({taskLeft, selectAllTodo, deleteAll, isShowButton,filterAll}) => {
 

@@ -24,8 +24,8 @@ span{
 .input-text{
   outline: none;
   border: none;
-  border-bottom: 1px grey solid;
   padding: 4px;
+  border-bottom: 1px grey solid;
 }
 @media screen and (max-width: 1920px){
   .input-field{
@@ -44,7 +44,6 @@ span{
 }
 li{
   list-style-type: none;
-  border-bottom: 1px grey solid;
 }
 
 .footer{
@@ -72,9 +71,7 @@ i{
 input[type="checkbox"] {
   display: none;
 }
-label{
-  margin: 0 0 -5px 0;
-}
+
 label::before {
   content: "";
   display: inline-block;
@@ -107,18 +104,17 @@ input[type="checkbox"]:checked + label::before{
   align-items: center;
   justify-content: space-between;
   font-size: 1.1em;
+  border-bottom: 1px solid grey;
 }
 #todo-text{
   display: flex;
 }
 
 ul{
-  padding: 10px 0 0 0;
+  padding: 10px 0 0 0 !important;
   margin: 0;
 }
-#but{
 
-}
 .todo {
   margin-bottom: 1rem;
 }
